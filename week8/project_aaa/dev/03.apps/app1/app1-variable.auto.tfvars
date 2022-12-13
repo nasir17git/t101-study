@@ -22,7 +22,7 @@ alb_ingress_rules = [
     sg_description  = "HTTPS inbound"
   },
 ]
-# more_alb_sg = [] # ALB에 추가로 부여할 보안그룹, 필요시 주석해제하고 입력
+more_alb_sg = [] # ALB에 추가로 부여할 보안그룹, 필요시 주석해제하고 입력
 
 # ALB 추가 설정
 # idle_timeout = "300" # ALB의 idle_timeout, 필요시 주석해제하고 입력

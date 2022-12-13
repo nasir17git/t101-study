@@ -14,7 +14,7 @@ terraform {
 terraform {
   backend "s3" {
     bucket         = "tfstate-678678"
-    key            = "tfstate/AAA"
+    key            = "tfstate/aaa-network"
     region         = "ap-northeast-2"
     dynamodb_table = "tfstate-678678"
   }
