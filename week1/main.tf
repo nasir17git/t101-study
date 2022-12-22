@@ -1,4 +1,19 @@
 # 1주차 과제 -  AWS VPC(Subnet, IGW 등)을 코드로 배포한 환경에서 EC2 웹 서버 배포
+terraform {
+  cloud {
+    organization = "example-org-74b427"
+    workspaces {
+      name = "week1"
+    }
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.10.0"
+    }
+  }
+}
 
 # provider 설정
 provider "aws" {
