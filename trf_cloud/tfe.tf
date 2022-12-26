@@ -1,7 +1,7 @@
 resource "tfe_variable_set" "test" {
   name         = "test_var_set"
   description  = "Some description."
-  organization = "org-test-221226"
+  organization = "org-8YBVYbTqtU8evZeK"
 }
 
 resource "tfe_workspace_variable_set" "test" {
