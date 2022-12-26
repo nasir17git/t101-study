@@ -121,16 +121,16 @@ resource "aws_security_group_rule" "nasir_sgoutbound" {
 
 # 시작 템플릿 (시작 구성 > 시작 템플릿)
 resource "aws_launch_template" "nasir_launch_template" {
-  name                   = "101_ec2_template"
-  image_id               = data.aws_ami.amazonlinux2.id
-  instance_type          = "t2.micro"
-  key_name               = "nasirk17"
-  user_data              = filebase64("userdata.sh")
+  name          = "101_ec2_template"
+  image_id      = data.aws_ami.amazonlinux2.id
+  instance_type = "t2.micro"
+  key_name      = "nasirk17"
+  user_data     = filebase64("userdata.sh")
 
   network_interfaces {
     associate_public_ip_address = true
-    subnet_id = aws_subnet.nasir_pub1.id
-    security_groups = [aws_security_group.nasir_sg.id]
+    subnet_id                   = aws_subnet.nasir_pub1.id
+    security_groups             = [aws_security_group.nasir_sg.id]
   }
 
   tag_specifications {

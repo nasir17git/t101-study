@@ -23,12 +23,12 @@ resource "aws_security_group" "var" {
 }
 
 resource "aws_instance" "var" {
-  ami                    = data.aws_ami.amazonlinux2.id
-  instance_type          = "t2.micro"
+  ami                         = data.aws_ami.amazonlinux2.id
+  instance_type               = "t2.micro"
   associate_public_ip_address = true
-  subnet_id              = var.subnet1_id
-  vpc_security_group_ids = [aws_security_group.var.id]
-  user_data              = local.web
+  subnet_id                   = var.subnet1_id
+  vpc_security_group_ids      = [aws_security_group.var.id]
+  user_data                   = local.web
 }
 
 output "var_ip" {

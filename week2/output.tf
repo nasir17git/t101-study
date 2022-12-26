@@ -1,5 +1,5 @@
 output "public_ips" {
-  value       = data.aws_instances.get_data.public_ips
+  value = data.aws_instances.get_data.public_ips
 }
 
 output "nasir_alb_dns" {
