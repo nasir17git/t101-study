@@ -36,3 +36,12 @@ resource "aws_route_table_association" "pub-rta" {
   subnet_id      = each.value.id
   route_table_id = aws_route_table.pubrt.id
 }
+
+#-------------Outputs----------------------------------------
+output "vpc_id" {
+  value = aws_vpc.vpc.id
+}
+
+output "subnet1_id" {
+  value = aws_subnet.pub["1"].id
+}

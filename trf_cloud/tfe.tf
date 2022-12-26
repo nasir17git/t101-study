@@ -5,35 +5,28 @@ resource "tfe_variable_set" "test" {
   organization = "org-test-221226"
 }
 
-resource "tfe_workspace_variable_set" "test" {
-  workspace_id    = "ws-VGoCt2CNu7GH6Aox"
-  variable_set_id = tfe_variable_set.test.id
-}
+# resource "tfe_workspace_variable_set" "test" {
+#   workspace_id    = "ws-VGoCt2CNu7GH6Aox"
+#   variable_set_id = tfe_variable_set.test.id
+# }
 
-resource "tfe_variable" "test-a" {
-  key             = "seperate_variable"
-  value           = "my_value_name"
+resource "tfe_variable" "vpc_id" {
+  key             = "vpc_id"
+  value           = aws_vpc.vpc.id
   category        = "terraform"
-  description     = "a useful description"
+  description     = "vpc_id"
   variable_set_id = tfe_variable_set.test.id
+  hcl = true
 }
 
-resource "tfe_variable" "test-b" {
-  key             = "another_variable"
-  value           = "my_value_name"
-  category        = "env"
-  description     = "an environment variable"
+resource "tfe_variable" "subnet1_id" {
+  key             = "subnet1_id"
+  value           = aws_subnet.pub["1"].id
+  category        = "terraform"
+  description     = "subnet_id"
   variable_set_id = tfe_variable_set.test.id
+  hcl = true
 }
-
-resource "tfe_variable" "network" {
-  key             = "another_variable"
-  value           = "my_value_name"
-  category        = "env"
-  description     = "an environment variable"
-  variable_set_id = tfe_variable_set.test.id
-}
-
 
 # ------
 # 굳이 상세설정까지 다 terraform으로 만드는건 좀 아닌듯함.. 수동 설정변경
