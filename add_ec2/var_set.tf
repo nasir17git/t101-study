@@ -27,7 +27,7 @@ resource "aws_instance" "var" {
   instance_type          = "t2.micro"
   associate_public_ip_address = true
   subnet_id              = var.subnet1_id
-  vpc_security_group_ids = [aws_security_group.ec2.id]
+  vpc_security_group_ids = [aws_security_group.var.id]
   user_data              = local.web
 }
 

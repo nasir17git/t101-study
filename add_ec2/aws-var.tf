@@ -2,6 +2,7 @@ variable "name_prefix" { default = "aaa" }
 variable "env" { default = "dev" }
 variable "server_port" { default = "80" }
 
+# --- remote state ---
 data "terraform_remote_state" "trf" {
   backend = "remote"
   config = {
@@ -12,15 +13,10 @@ data "terraform_remote_state" "trf" {
   }
 }
 
-# data "terraform_remote_state" "add" {
-#   backend = "remote"
-#   config = {
-#     organization = "org-test-221226"
-#     workspaces = {
-#       name = "add_ec2"
-#     }
-#   }
-# }
+# --- var_set ---
+
+variable "vpc_id" {}
+variable "subnet1_id" {}
 
 locals {
   web = <<EOF
