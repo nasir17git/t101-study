@@ -12,20 +12,20 @@ resource "tfe_variable_set" "test" {
 
 resource "tfe_variable" "vpc_id" {
   key             = "vpc_id"
-  value           = "${aws_vpc.vpc.id}"
+  value           = aws_vpc.vpc.id
   category        = "terraform"
   description     = "vpc_id"
   variable_set_id = tfe_variable_set.test.id
-  hcl = true
+  # hcl = true
 }
 
 resource "tfe_variable" "subnet1_id" {
   key             = "subnet1_id"
-  value           = "${aws_subnet.pub["1"].id}"
+  value           = aws_subnet.pub["1"].id
   category        = "terraform"
   description     = "subnet_id"
   variable_set_id = tfe_variable_set.test.id
-  hcl = true
+  # hcl = true
 }
 
 # ------
