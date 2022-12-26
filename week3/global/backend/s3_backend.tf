@@ -13,7 +13,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
   versioning_configuration {
     status = "Enabled"
   }
-} 
+}
 
 resource "aws_dynamodb_table" "s3_lock" {
   name         = "s3_lock"

@@ -55,7 +55,7 @@ data "aws_ami" "amazonlinux2" {
 # EC2 Data 가져오기 (Public ip 조회)
 data "aws_instances" "get_data" {
   filter {
-    name = "tag:Name"
+    name   = "tag:Name"
     values = ["101_asg_ec2"]
   }
 }

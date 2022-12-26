@@ -28,7 +28,7 @@ more_alb_sg = [] # ALB에 추가로 부여할 보안그룹, 필요시 주석해�
 # idle_timeout = "300" # ALB의 idle_timeout, 필요시 주석해제하고 입력
 
 # target group 관련 설정
-target_port          = 80  # EC2와 동일한 target_port 입력
+target_port = 80 # EC2와 동일한 target_port 입력
 # deregistration_delay = 300 # ALB 타겟 그룹의 deregistration delay 지정, 필요시 주석해제하고 입력
 health_check = {
   health_check_path     = "/health_check" # ALB 타겟 그룹의 health_check 경로 입력
@@ -63,7 +63,7 @@ ec2_ingress_rules = [
 more_ec2_sg = [] # EC2에 추가로 부여할 보안그룹, 필요시 주석해제하고 입력
 
 # EC2 관련 설정 
-instance_type        = "t3.micro"          # 필요한 인스턴스 유형 입력
+instance_type = "t3.micro" # 필요한 인스턴스 유형 입력
 # key_name             = "nasirk17"          # EC2 접속을 위한 키페어 이름, 필요시 주석해제하고 입력
 # iam_instance_profile = "nasir-ec2-profile" # EC2에 부여할 role, 필요시 주석해제하고 입력
 # userdata             = local.web           # data.tf 의 userdata 입력 > auto.tfvars에서는 variable, local 사용불가
