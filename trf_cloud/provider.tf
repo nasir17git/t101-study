@@ -1,11 +1,10 @@
 terraform {
   cloud {
-    organization = tfe_organization.test.name
+    organization = "org-test-221226"
     workspaces {
-      tags = ["test"]
+      name = "trf_cloud"
     }
   }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"

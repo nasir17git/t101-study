@@ -5,7 +5,7 @@ resource "tfe_variable_set" "test" {
 }
 
 resource "tfe_workspace_variable_set" "test" {
-  workspace_id    = "trf_cloud"
+  workspace_id    = "ws-VGoCt2CNu7GH6Aox"
   variable_set_id = tfe_variable_set.test.id
 }
 
