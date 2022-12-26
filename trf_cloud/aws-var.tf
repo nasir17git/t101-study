@@ -9,7 +9,7 @@ variable "pub_subnet_cidrs" {
 }
 variable "pri_subnet_cidrs" {
   default = {
-    1 = "10.0.40.0/24"
+    1 = "10.0.44.0/24"
     2 = "10.0.50.0/24"
   3 = "10.0.60.0/24" }
 }
