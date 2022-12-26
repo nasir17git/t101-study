@@ -12,6 +12,9 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.10.0"
     }
+    tfe = {
+      version = "~> 0.38.0"
+    }
   }
 }
 
@@ -31,14 +34,14 @@ resource "aws_vpc" "vpc" {
 
 # public subnet 생성
 resource "aws_subnet" "pub1" {
-  vpc_id = aws_vpc.vpc.id
-  cidr_block = var.public_cidr
-  availability_zone = "ap-northeast-2a"
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.public_cidr
+  availability_zone       = "ap-northeast-2a"
   map_public_ip_on_launch = true
 
   tags = {
     Name = "pub1"
-  }  
+  }
 }
 
 # igw 생성
@@ -72,11 +75,11 @@ resource "aws_route_table_association" "prta" {
 
 # EC2 생성 (Ubuntu, Apache, 닉네임포함 index.html, 포트 50000)
 resource "aws_instance" "ec2" {
-  ami = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.pub1.id
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.pub1.id
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-  user_data = <<EOF
+  user_data              = <<EOF
 #!/bin/bash
 apt install -y apache2
 echo "Hello nasir, from Terraform 101 Study" > index.html
@@ -90,14 +93,14 @@ EOF
 
 # EC2 보안그룹 (포트 50000에 대해서만 개방)
 resource "aws_security_group" "ec2-sg" {
-  name = "ec2-sg"
+  name        = "ec2-sg"
   description = "Security group for EC2 instance"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    from_port = var.server_port
-    to_port = var.server_port
-    protocol = "tcp"
+    from_port   = var.server_port
+    to_port     = var.server_port
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -107,7 +110,7 @@ resource "aws_security_group" "ec2-sg" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   tags = {
     Name = "ec2-sg"
   }
