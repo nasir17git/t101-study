@@ -3,9 +3,9 @@ variable "env" { default = "dev" }
 variable "vpc_cidr" { default = "10.0.0.0/16" }
 variable "pub_subnet_cidrs" {
   default = {
-    1 = "10.0.15.0/24"
-    2 = "10.0.25.0/24"
-  3 = "10.0.35.0/24" }
+    1 = "10.0.13.0/24"
+    2 = "10.0.23.0/24"
+  3 = "10.0.33.0/24" }
 }
 variable "pri_subnet_cidrs" {
   default = {
