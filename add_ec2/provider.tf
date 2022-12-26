@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "org-test-221226"
     workspaces {
-      name = "trf_cloud"
+      name = "add_ec2"
     }
   }
   required_providers {
