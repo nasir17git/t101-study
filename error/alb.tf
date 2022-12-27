@@ -1,9 +1,10 @@
 resource "aws_lb" "alb" {
-  name               = "${var.env}-${var.name_prefix}-alb"
-  internal           = false
-  load_balancer_type = "application"
-  subnets            = tolist([aws_subnet.pub[1].id, aws_subnet.pub[2].id, aws_subnet.pub[3].id])
-  security_groups    = [aws_security_group.alb.id]
+  name                       = "${var.env}-${var.name_prefix}-alb"
+  internal                   = false
+  load_balancer_type         = "application"
+  subnets                    = tolist([aws_subnet.pub[1].id, aws_subnet.pub[2].id, aws_subnet.pub[3].id])
+  security_groups            = [aws_security_group.alb.id]
+  enable_deletion_protection = true
   tags = {
     Name = "${var.env}-${var.name_prefix}-alb"
   }
