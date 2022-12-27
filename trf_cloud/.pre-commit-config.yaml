@@ -7,7 +7,15 @@ repos:
     hooks:
       - name: Terraform Format
         id: terraform_fmt
+        
+      - name: Terraform Validate
+        id: terraform_validate
 
+      - name: Infracost
+        id: infracost_breakdown
+        args:
+        - --args=--path=.
+        
       - name: Terraform Lock Provider
         id: terraform_providers_lock
         args:
