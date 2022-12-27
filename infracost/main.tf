@@ -81,6 +81,40 @@ EOF
   }
 }
 
+resource "aws_instance" "ec2-2" {
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.pub1.id
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  user_data              = <<EOF
+#!/bin/bash
+apt install -y apache2
+echo "Hello nasir, from Terraform 101 Study" > index.html
+nohup busybox httpd -f -p ${var.server_port} &
+EOF
+
+  tags = {
+    Name = "ec2"
+  }
+}
+
+resource "aws_instance" "ec2-3" {
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.pub1.id
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  user_data              = <<EOF
+#!/bin/bash
+apt install -y apache2
+echo "Hello nasir, from Terraform 101 Study" > index.html
+nohup busybox httpd -f -p ${var.server_port} &
+EOF
+
+  tags = {
+    Name = "ec2"
+  }
+}
+
 # EC2 보안그룹 (포트 50000에 대해서만 개방)
 resource "aws_security_group" "ec2-sg" {
   name        = "ec2-sg"
