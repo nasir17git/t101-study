@@ -12,7 +12,7 @@ resource "aws_lb" "alb" {
 resource "aws_security_group" "alb" {
   name        = "${var.env}-${var.name_prefix}-alb"
   description = "${var.env}-${var.name_prefix}-alb"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = var.server_port
