@@ -1,0 +1,59 @@
+name: "tfe_run"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  tfe_run:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kvrhdn/tfe-run@v1
+        with:
+          # Token used to communicate with the Terraform Cloud API. Must be a user or
+          # team api token.
+          token: ${{ secrets.TFE_TOKEN }}
+      
+          # Name of the organization on Terraform Cloud. Defaults to the GitHub
+          # organization name.
+          organization: org-test-221226
+      
+          # Name of the workspace on Terraform Cloud.
+          workspace: trf_cloud
+      
+          # Optional message to use as name of the run.
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
+      
+          # The directory that is uploaded to Terraform Cloud/Enterprise, defaults
+          # to the repository root. Respsects .terraformignore. Note: this is
+          # prefixed to the "Terraform Working Directory" in the remote workspace
+          # settings.
+          # directory: integration/
+      
+          # The type of run, allowed options are 'plan', 'apply' and 'destroy'.
+          type: plan
+      
+          # An optional list of resource addresses to target. Should be a list of
+          # strings separated by new lines.
+          #
+          # For more information about resource targeting, check https://www.terraform.io/docs/commands/plan.html#resource-targeting
+          # targets: |
+              # resource.name
+      
+          # Whether we should wait for the plan or run to be applied. This will block
+          # until the run is finished.
+          wait-for-completion: true
+      
+          # The contents of a auto.tfvars file that will be uploaded to Terraform
+          # Cloud. This can be used to set Terraform variables.
+          # tf-vars: |
+          #   run_number = ${{ github.run_number }}
+          #   service    = "example"
+
+  # Optionally, assign this step an ID so you can refer to the outputs from the
+  # action with ${{ steps.<id>.outputs.<output variable> }}
+  # id: tfe-run
