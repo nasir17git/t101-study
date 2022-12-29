@@ -22,7 +22,7 @@ jobs:
           organization: org-test-221226
       
           # Name of the workspace on Terraform Cloud.
-          workspace: trf_cloud
+          workspace: trf_cloud_api
       
           # Optional message to use as name of the run.
           message: |
