@@ -32,7 +32,7 @@ jobs:
           # to the repository root. Respsects .terraformignore. Note: this is
           # prefixed to the "Terraform Working Directory" in the remote workspace
           # settings.
-          directory: /trf_cloud
+          directory: trf_cloud
       
           # The type of run, allowed options are 'plan', 'apply' and 'destroy'.
           type: plan
