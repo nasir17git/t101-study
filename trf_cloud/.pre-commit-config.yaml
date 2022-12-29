@@ -11,16 +11,16 @@ repos:
       - name: Terraform Validate
         id: terraform_validate
 
-      - name: Infracost
-        id: infracost_breakdown
-        args:
-        - --args=--path=.
+      # - name: Infracost
+      #   id: infracost_breakdown
+      #   args:
+      #   - --args=--path=.
         
-      - name: Terraform Lock Provider
-        id: terraform_providers_lock
-        args:
-          - --args=-platform=windows_amd64
-          - --args=-platform=darwin_amd64
+      # - name: Terraform Lock Provider
+      #   id: terraform_providers_lock
+      #   args:
+      #     - --args=-platform=windows_amd64
+      #     - --args=-platform=darwin_amd64
 
       # - id: terraform_tflint
       #   args:
