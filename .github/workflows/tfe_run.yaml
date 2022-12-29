@@ -11,7 +11,11 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     steps:
-      - uses: kvrhdn/tfe-run@v1
+      - names: where am i
+        run: pwd && ls -alh
+
+      - names: tfe-run
+        uses: kvrhdn/tfe-run@v1
         with:
           # Token used to communicate with the Terraform Cloud API. Must be a user or
           # team api token.
@@ -32,7 +36,7 @@ jobs:
           # to the repository root. Respsects .terraformignore. Note: this is
           # prefixed to the "Terraform Working Directory" in the remote workspace
           # settings.
-          # directory: integration/
+          directory: /trf_cloud
       
           # The type of run, allowed options are 'plan', 'apply' and 'destroy'.
           type: plan
