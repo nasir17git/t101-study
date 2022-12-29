@@ -14,9 +14,6 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     steps:
-      - name: where am i
-        run: pwd && ls -alh
-
       - name: tfe-run
         uses: kvrhdn/tfe-run@v1
         with:
