@@ -7,14 +7,17 @@ on:
   pull_request:
 
 jobs:
+  where:
+    
+
   tfe_run:
     name: "Terraform"
     runs-on: ubuntu-latest
     steps:
-      - names: where am i
+      - name: where am i
         run: pwd && ls -alh
 
-      - names: tfe-run
+      - name: tfe-run
         uses: kvrhdn/tfe-run@v1
         with:
           # Token used to communicate with the Terraform Cloud API. Must be a user or
