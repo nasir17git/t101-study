@@ -15,7 +15,7 @@ jobs:
       with:
         token: ${{ secrets.TFE_TOKEN }}
         organization: org-test-221226
-        workspace: trf_cloud
+        workspace: trf_cloud_api
         directory: ./trf_cloud
         message: |
           Run triggered using tfe-run (commit: ${{ github.SHA }})
