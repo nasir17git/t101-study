@@ -8,10 +8,13 @@ on:
 
 jobs:
   tfe_run_simple:
-  - uses: kvrhdn/tfe-run@v1
-    with:
-      token: ${{ secrets.TFE_TOKEN }}
-      workspace: trf_cloud_api
-      message: |
-        Run triggered using tfe-run (commit: ${{ github.SHA }})
-    id: tfe-run
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: kvrhdn/tfe-run@v1
+      with:
+        token: ${{ secrets.TFE_TOKEN }}
+        workspace: trf_cloud_api
+        message: |
+          Run triggered using tfe-run (commit: ${{ github.SHA }})
+      id: tfe-run
