@@ -14,7 +14,7 @@ jobs:
     - uses: kvrhdn/tfe-run@v1
       with:
         token: ${{ secrets.TFE_TOKEN }}
-        workspace: trf_cloud_api
+        workspace: trf_cloud
         message: |
           Run triggered using tfe-run (commit: ${{ github.SHA }})
       id: tfe-run
