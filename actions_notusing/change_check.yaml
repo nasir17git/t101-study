@@ -1,0 +1,4 @@
+git hash object of directory
+
+git ls-files git hash-object
+find aws-lds | md5sum
