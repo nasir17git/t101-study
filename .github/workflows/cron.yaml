@@ -2,7 +2,7 @@ name: daily_check
 
 on:
   schedule:
-    - 0 0 * * *
+    - cron: "0 0 * * *"
 
 jobs:
   workspace1(ext):
