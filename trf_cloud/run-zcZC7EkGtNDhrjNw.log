@@ -1,0 +1,11 @@
+Terraform v1.3.6
+on linux_amd64
+
+Error: No Terraform configuration files found in working directory
+
+Terraform requires configuration files to plan changes. Planning without a
+configuration would mark everything for destruction, which is normally not what
+is desired. If you would like to destroy everything, queue a destroy plan
+instead. Otherwise, create a Terraform configuration file (.tf file), or check
+that the working directory is set correctly on the workspace, and try again.
+Operation failed: failed checking for terraform files: lstat /home/tfc-agent/.tfc-agent/component/terraform/runs/run-zcZC7EkGtNDhrjNw/config/trf_cloud: no such file or directory
