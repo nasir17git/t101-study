@@ -25,7 +25,7 @@ jobs:
         id: ext-run
 
       - name: result check
-        run: echo "steps.ext-run.outputs.has-changes"
+        run: echo "${{ steps.ext-run.outputs.has-changes }}"
 
   workspace2_lds:
     name: "lds plan"
@@ -46,7 +46,7 @@ jobs:
         id: lds-run
       
       - name: result check
-        run: echo "steps.lds-run.outputs.has-changes"
+        run: echo "${{ steps.lds-run.outputs.has-changes }}"
 
   workspace3_qa:
     name: "qa plan"
@@ -67,7 +67,7 @@ jobs:
         id: qa-run
 
       - name: result check
-        run: echo "steps.qa-run.outputs.has-changes"
+        run: echo "${{ steps.qa-run.outputs.has-changes }}"
 
   slack_alert:
     name: slack_alert
@@ -86,7 +86,7 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "Terraform Health Check",
+                    "text": "Terraform Health Check"
                   }
                 },      
                 {
