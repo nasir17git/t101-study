@@ -72,7 +72,6 @@ jobs:
 		            	"text": {
 		            		"type": "plain_text",
 		            		"text": "Terraform Health Check",
-		            		"emoji": true
 		            	}
 		            },      
                 {
