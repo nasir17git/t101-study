@@ -30,7 +30,6 @@ jobs:
           script: |
             const output = `#### run-url 🖌\`${{ steps.tfe-run.outputs.run-url }}\`
             #### has-changes ⚙️\`${{ steps.tfe-run.outputs.has-changes }}\`
-            #### tf-** 🤖\`${{ steps.tfe-run.outputs.tf-** }}\`
 
             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
