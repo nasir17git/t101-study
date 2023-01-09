@@ -15,8 +15,8 @@ data "terraform_remote_state" "trf" {
 
 # --- var_set ---
 
-variable "vpc_id" {}
-variable "subnet1_id" {}
+variable "vpc_id" { default = null }
+variable "subnet1_id" { default = null }
 
 locals {
   web = <<EOF

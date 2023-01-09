@@ -29,7 +29,11 @@ resource "aws_instance" "remote" {
   subnet_id                   = data.terraform_remote_state.trf.outputs.subnet1_id
   vpc_security_group_ids      = [aws_security_group.remote.id]
   user_data                   = local.web
+  tags = {
+    Name = "tag-test"
+  }
 }
+
 
 output "remote_ip" {
   value = aws_instance.remote.public_ip
