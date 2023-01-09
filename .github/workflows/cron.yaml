@@ -85,15 +85,15 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": *ext:*\n${{ toJSON(needs.workspace1_ext.outputs.ext_result) }}
+                      "text": ${{ toJSON(needs.workspace1_ext.outputs.ext_result) }}
                     },
                     {
                       "type": "mrkdwn",
-                      "text": *lds:*\n${{ toJSON(needs.workspace2_lds.outputs.lds_result) }}
+                      "text": ${{ toJSON(needs.workspace2_lds.outputs.lds_result) }}
                     },
                     {
                       "type": "mrkdwn",
-                      "text": *qa:*\n${{ toJSON(needs.workspace3_qa.outputs.qa_result) }}
+                      "text": ${{ toJSON(needs.workspace3_qa.outputs.qa_result) }}
                     }
                   ]
                 }
