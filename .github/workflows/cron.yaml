@@ -1,0 +1,81 @@
+name: daily_check
+
+on:
+  schedule:
+    - 0 0 * * *
+
+jobs:
+  workspace1(ext):
+    name: "ext plan"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: kvrhdn/tfe-run@v1
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: trf_cloud
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
+        id: ext-run
+
+  workspace2(lds):
+    name: "lds plan"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: kvrhdn/tfe-run@v1
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: add_ec2
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
+        id: lds-run
+
+  workspace3(qa):
+    name: "qa plan"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: kvrhdn/tfe-run@v1
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: error
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
+        id: qa-run
+
+  slack_alert:
+    name: slack_alert
+    runs-on: ubuntu-latest
+      needs: [workspace1(ext),workspace2(lds),workspace3(qa)]
+    steps: 
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
