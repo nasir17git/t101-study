@@ -9,6 +9,8 @@ jobs:
   workspace1_ext:
     name: "ext plan"
     runs-on: ubuntu-latest
+    outputs:
+      ext_result: ${{ steps.ext-run.outputs.has-changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,6 +27,8 @@ jobs:
   workspace2_lds:
     name: "lds plan"
     runs-on: ubuntu-latest
+    outputs:
+      lds_result: ${{ steps.lds-run.outputs.has-changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,6 +45,8 @@ jobs:
   workspace3_qa:
     name: "qa plan"
     runs-on: ubuntu-latest
+    outputs:
+      qa_result: ${{ steps.qa-run.outputs.has-changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -79,15 +85,15 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*ext:*\n${{ steps.ext-run.outputs.has-changes }}"
+                      "text": "*ext:*\n${{ needs.workspace1_ext.outputs.ext_result }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*lds:*\n${{ steps.lds-run.outputs.has-changes }}"
+                      "text": "*lds:*\n${{ needs.workspace2_lds.outputs.lds_result }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*qa:*\n${{ steps.qa-run.outputs.has-changes }}"
+                      "text": "*qa:*\n${{ needs.workspace3_qa.outputs.qa_result }}"
                     }
                   ]
                 }
