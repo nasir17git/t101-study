@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  workspace1(ext):
+  workspace1_ext:
     name: "ext plan"
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
             Run triggered using tfe-run (commit: ${{ github.SHA }})
         id: ext-run
 
-  workspace2(lds):
+  workspace2_lds:
     name: "lds plan"
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +38,7 @@ jobs:
             Run triggered using tfe-run (commit: ${{ github.SHA }})
         id: lds-run
 
-  workspace3(qa):
+  workspace3_qa:
     name: "qa plan"
     runs-on: ubuntu-latest
     steps:
@@ -57,7 +57,7 @@ jobs:
   slack_alert:
     name: slack_alert
     runs-on: ubuntu-latest
-    needs: [workspace1(ext), workspace2(lds), workspace3(qa)]
+    needs: [workspace1_ext, workspace2_lds, workspace3_qa]
     steps: 
       - name: Send custom JSON data to Slack workflow
         id: slack
