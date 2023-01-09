@@ -94,7 +94,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "aaaa"
+                      "text": "*ext:*\n${{ needs.workspace1_ext.outputs.ext_result }}"
                     },
                     {
                       "type": "mrkdwn",
