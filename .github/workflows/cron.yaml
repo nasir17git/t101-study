@@ -79,15 +79,15 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*ext:*\n${{ steps.workspace1_ext.outputs.has-changes }}"
+                      "text": "*ext:*\n${{ steps.ext-run.outputs.has-changes }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*lds:*\n${{ steps.workspace2_lds.outputs.has-changes }}"
+                      "text": "*lds:*\n${{ steps.lds-run.outputs.has-changes }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*qa:*\n${{ steps.workspace3_qa.outputs.has-changes }}"
+                      "text": "*qa:*\n${{ steps.qa-run.outputs.has-changes }}"
                     }
                   ]
                 }
