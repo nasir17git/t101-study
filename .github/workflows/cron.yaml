@@ -64,7 +64,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.23.0
         with:
           # For posting a rich message using Block Kit
-          payload: |
+          payload:
             {
               "blocks": [
 		            {
