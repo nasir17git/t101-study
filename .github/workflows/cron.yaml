@@ -98,11 +98,11 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": ${{ toJSON(needs.workspace2_lds.outputs.lds_result) }}
+                      "text": "*lds:*\n${{ needs.workspace2_lds.outputs.lds_result }}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": ${{ toJSON(needs.workspace3_qa.outputs.qa_result) }}
+                      "text": "*qa:*\n${{ needs.workspace3_qa.outputs.qa_result }}"
                     }
                   ]
                 }
