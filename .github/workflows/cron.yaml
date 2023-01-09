@@ -56,7 +56,7 @@ jobs:
   slack_alert:
     name: slack_alert
     runs-on: ubuntu-latest
-      needs: [workspace1(ext),workspace2(lds),workspace3(qa)]
+    needs: [workspace1(ext), workspace2(lds), workspace3(qa)]
     steps: 
       - name: Send custom JSON data to Slack workflow
         id: slack
