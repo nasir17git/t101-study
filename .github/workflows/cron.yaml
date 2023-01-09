@@ -66,7 +66,6 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "",
               "blocks": [
 		            {
 		            	"type": "header",
@@ -80,16 +79,16 @@ jobs:
                   "type": "section",
                   "fields": [
                     {
-                    "type": "mrkdwn",
-                    "text": "*ext:*\n${{ steps.workspace1_ext.outputs.has-changes }}"
+                      "type": "mrkdwn",
+                      "text": "*ext:*\n${{ steps.workspace1_ext.outputs.has-changes }}"
                     },
                     {
-                    "type": "mrkdwn",
-                    "text": "*lds:*\n${{ steps.workspace2_lds.outputs.has-changes }}"
+                      "type": "mrkdwn",
+                      "text": "*lds:*\n${{ steps.workspace2_lds.outputs.has-changes }}"
                     },
                     {
-                    "type": "mrkdwn",
-                    "text": "*qa:*\n${{ steps.workspace3_qa.outputs.has-changes }}"
+                      "type": "mrkdwn",
+                      "text": "*qa:*\n${{ steps.workspace3_qa.outputs.has-changes }}"
                     },
                   ]
                 }
@@ -98,63 +97,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-
-{
-	"blocks": [
-		{
-			"type": "header",
-			"text": {
-				"type": "plain_text",
-				"text": "New request",
-				"emoji": true
-			}
-		},
-		{
-			"type": "section",
-			"fields": [
-				{
-					"type": "mrkdwn",
-					"text": "*Type:*\nPaid Time Off"
-				},
-				{
-					"type": "mrkdwn",
-					"text": "*Created by:*\n<example.com|Fred Enriquez>"
-				}
-			]
-		},
-		{
-			"type": "section",
-			"fields": [
-				{
-					"type": "mrkdwn",
-					"text": "*When:*\nAug 10 - Aug 13"
-				},
-				{
-					"type": "mrkdwn",
-					"text": "*Type:*\nPaid time off"
-				}
-			]
-		},
-		{
-			"type": "section",
-			"fields": [
-				{
-					"type": "mrkdwn",
-					"text": "*Hours:*\n16.0 (2 days)"
-				},
-				{
-					"type": "mrkdwn",
-					"text": "*Remaining balance:*\n32.0 hours (4 days)"
-				}
-			]
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "<https://example.com|View request>"
-			}
-		}
-	]
-}
