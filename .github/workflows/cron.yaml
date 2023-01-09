@@ -3,6 +3,7 @@ name: daily_check
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   workspace1(ext):
