@@ -1,4 +1,4 @@
-name: "tfe_run_simple"
+name: "tfe_run"
 
 on:
   push:
@@ -22,3 +22,22 @@ jobs:
           message: |
             Run triggered using tfe-run (commit: ${{ github.SHA }})
         id: tfe-run
+
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### run-url 🖌\`${{ steps.tfe-run.outputs.run-url }}\`
+            #### has-changes ⚙️\`${{ steps.tfe-run.outputs.has-changes }}\`
+            #### tf-** 🤖\`${{ steps.tfe-run.outputs.tf-** }}\`
+
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
