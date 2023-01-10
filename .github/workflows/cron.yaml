@@ -16,13 +16,15 @@ jobs:
         uses: actions/checkout@v3
 
       - uses: kvrhdn/tfe-run@v1
+        id: ext-run
+        type: plan
+        wait-for-completion: true
         with:
           token: ${{ secrets.TFE_TOKEN }}
           organization: org-test-221226
           workspace: trf_cloud
           message: |
             Run triggered using tfe-run (commit: ${{ github.SHA }})
-        id: ext-run
 
       - name: result check
         run: echo "${{ steps.ext-run.outputs.has-changes }}"
@@ -37,13 +39,15 @@ jobs:
         uses: actions/checkout@v3
 
       - uses: kvrhdn/tfe-run@v1
+        id: lds-run
+        type: plan
+        wait-for-completion: true
         with:
           token: ${{ secrets.TFE_TOKEN }}
           organization: org-test-221226
           workspace: add_ec2
           message: |
             Run triggered using tfe-run (commit: ${{ github.SHA }})
-        id: lds-run
       
       - name: result check
         run: echo "${{ steps.lds-run.outputs.has-changes }}"
@@ -58,13 +62,15 @@ jobs:
         uses: actions/checkout@v3
 
       - uses: kvrhdn/tfe-run@v1
+        id: qa-run
+        type: plan
+        wait-for-completion: true
         with:
           token: ${{ secrets.TFE_TOKEN }}
           organization: org-test-221226
           workspace: error
           message: |
             Run triggered using tfe-run (commit: ${{ github.SHA }})
-        id: qa-run
 
       - name: result check
         run: echo "${{ steps.qa-run.outputs.has-changes }}"
