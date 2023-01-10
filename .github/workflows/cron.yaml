@@ -119,14 +119,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "ext has changes?"
+                    "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
                   },
                   "accessory": {
                     "type": "button",
                     "action_id": "ext_button",
                     "text": {
                       "type": "plain_text",
-                      "text": "${{ needs.workspace1_ext.outputs.ext_result }}"
+                      "text": "View"
                     },
                     "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
                   }
@@ -135,14 +135,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "lds has changes?"
+                    "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
                   },
                   "accessory": {
                     "type": "button",
                     "action_id": "lds_button",
                     "text": {
                       "type": "plain_text",
-                      "text": "${{ needs.workspace2_lds.outputs.lds_result }}"
+                      "text": "View"
                     },
                     "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
                   }
@@ -151,14 +151,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "qa has changes?"
+                    "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
                   },
                   "accessory": {
                     "type": "button",
                     "action_id": "qa_button",
                     "text": {
                       "type": "plain_text",
-                      "text": "${{ needs.workspace3_qa.outputs.qa_result }}"
+                      "text": "View"
                     },
                     "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
                   }
