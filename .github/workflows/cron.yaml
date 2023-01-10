@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 1-5" # 한국시간 월-금 오전 9시 실행 > 깃헙액션 이슈로 실제 실행은 1시간정도 딜레이
   workflow_dispatch:
 
 jobs:
@@ -88,7 +88,7 @@ jobs:
     steps: 
       - name: get current date
         id: date
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> %GITHUB_ENV
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -123,6 +123,7 @@ jobs:
                   },
                   "accessory": {
                     "type": "button",
+                    "action_id": "ext_button",
                     "text": {
                       "type": "plain_text",
                       "text": "${{ needs.workspace1_ext.outputs.ext_result }}"
@@ -138,6 +139,7 @@ jobs:
                   },
                   "accessory": {
                     "type": "button",
+                    "action_id": "lds_button",
                     "text": {
                       "type": "plain_text",
                       "text": "${{ needs.workspace2_lds.outputs.lds_result }}"
@@ -153,6 +155,7 @@ jobs:
                   },
                   "accessory": {
                     "type": "button",
+                    "action_id": "qa_button",
                     "text": {
                       "type": "plain_text",
                       "text": "${{ needs.workspace3_qa.outputs.qa_result }}"
