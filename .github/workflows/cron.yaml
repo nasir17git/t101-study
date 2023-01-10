@@ -90,72 +90,72 @@ jobs:
         with:
           # For posting a rich message using Block Kit
           payload: |
-{
-	"blocks": [
-		{
-			"type": "header",
-			"text": {
-				"type": "plain_text",
-				"text": "${{ env.DATE }} Terraform Health Check"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "plain_text",
-				"text": "변경사항을 감지하여, 없으면 > false / 있으면 > true"
-			}
-		},
-		{
-			"type": "divider"
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "ext has changes?"
-			},
-			"accessory": {
-				"type": "button",
-				"text": {
-					"type": "plain_text",
-					"text": "${{ needs.workspace1_ext.outputs.ext_result }}"
-				},
-				"url": "${{ workspace1_ext.outputs.run-url }}"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "lds has changes?"
-			},
-			"accessory": {
-				"type": "button",
-				"text": {
-					"type": "plain_text",
-					"text": "${{ needs.workspace2_lds.outputs.lds_result }}"
-				},
-				"url": "${{ workspace2_lds.outputs.run-url }}"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "qa has changes?"
-			},
-			"accessory": {
-				"type": "button",
-				"text": {
-					"type": "plain_text",
-					"text": "${{ needs.workspace3_qa.outputs.qa_result }}"
-				},
-				"url": "${{ workspace3_qa.outputs.run-url }}"
-			}
-		}
-	]
-}
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${{ env.DATE }} Terraform Health Check"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "변경사항을 감지하여, 없으면 > false / 있으면 > true"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "ext has changes?"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "${{ needs.workspace1_ext.outputs.ext_result }}"
+                    },
+                    "url": "${{ workspace1_ext.outputs.run-url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "lds has changes?"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "${{ needs.workspace2_lds.outputs.lds_result }}"
+                    },
+                    "url": "${{ workspace2_lds.outputs.run-url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "qa has changes?"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "${{ needs.workspace3_qa.outputs.qa_result }}"
+                    },
+                    "url": "${{ workspace3_qa.outputs.run-url }}"
+                  }
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
