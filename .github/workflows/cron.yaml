@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       ext_result: ${{ steps.ext-run.outputs.has-changes }}
+      ext_url: ${{ steps.ext-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       lds_result: ${{ steps.lds-run.outputs.has-changes }}
+      lds_url: ${{ steps.lds-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -57,6 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       qa_result: ${{ steps.qa-run.outputs.has-changes }}
+      qa_url: ${{ steps.qa-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -121,7 +124,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace1_ext.outputs.ext_result }}"
                     },
-                    "url": "${{ steps.workspace1_ext.outputs.run-url }}"
+                    "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
                   }
                 },
                 {
@@ -136,7 +139,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace2_lds.outputs.lds_result }}"
                     },
-                    "url": "${{ steps.workspace2_lds.outputs.run-url }}"
+                    "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
                   }
                 },
                 {
@@ -151,7 +154,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace3_qa.outputs.qa_result }}"
                     },
-                    "url": "${{ steps.workspace3_qa.outputs.run-url }}"
+                    "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
                   }
                 }
               ]
