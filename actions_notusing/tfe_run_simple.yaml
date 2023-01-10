@@ -1,24 +1,44 @@
-name: "tfe_run_simple"
+# name: "tfe_run"
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
 
-jobs:
-  tfe_run_simple:
-    name: "Terraform"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+# jobs:
+#   tfe_run_simple:
+#     name: "Terraform"
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: kvrhdn/tfe-run@v1
-        with:
-          token: ${{ secrets.TFE_TOKEN }}
-          organization: org-test-221226
-          workspace: trf_cloud
-          message: |
-            Run triggered using tfe-run (commit: ${{ github.SHA }})
-        id: tfe-run
+#       - uses: kvrhdn/tfe-run@v1
+#         with:
+#           token: ${{ secrets.TFE_TOKEN }}
+#           organization: org-test-221226
+#           workspace: trf_cloud
+#           message: |
+#             Run triggered using tfe-run (commit: ${{ github.SHA }})
+#         id: tfe-run
+
+#       - uses: actions/github-script@v6
+#         if: github.event_name == 'pull_request'
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           script: |
+#             const output = `#### run-url 🖌\`${{ steps.tfe-run.outputs.run-url }}\`
+#             #### has-changes ⚙️\`${{ steps.tfe-run.outputs.has-changes }}\`
+
+#             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+#             github.rest.issues.createComment({
+#               issue_number: context.issue.number,
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               body: output
+#             })
+

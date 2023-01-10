@@ -1,4 +1,4 @@
-# name: "Terraform"
+# name: "Terraform_Official"
 
 # on:
 #   push:
@@ -36,6 +36,8 @@
 #     steps:
 #       - name: Checkout
 #         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ github.event.pull_request.head.sha }}
 
 #       - name: Setup Terraform
 #         uses: hashicorp/setup-terraform@v2

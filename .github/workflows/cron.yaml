@@ -121,7 +121,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace1_ext.outputs.ext_result }}"
                     },
-                    "url": "${{ workspace1_ext.outputs.run-url }}"
+                    "url": "${{ steps.workspace1_ext.outputs.run-url }}"
                   }
                 },
                 {
@@ -136,7 +136,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace2_lds.outputs.lds_result }}"
                     },
-                    "url": "${{ workspace2_lds.outputs.run-url }}"
+                    "url": "${{ steps.workspace2_lds.outputs.run-url }}"
                   }
                 },
                 {
@@ -151,7 +151,7 @@ jobs:
                       "type": "plain_text",
                       "text": "${{ needs.workspace3_qa.outputs.qa_result }}"
                     },
-                    "url": "${{ workspace3_qa.outputs.run-url }}"
+                    "url": "${{ steps.workspace3_qa.outputs.run-url }}"
                   }
                 }
               ]
