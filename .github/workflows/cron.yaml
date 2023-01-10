@@ -1,6 +1,9 @@
 name: daily_check
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
@@ -85,7 +88,7 @@ jobs:
     steps: 
       - name: get current date
         id: date
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> GITHUB_ENV
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> %GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
