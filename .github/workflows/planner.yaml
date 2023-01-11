@@ -69,7 +69,7 @@ jobs:
           terraform validate
 
       - name: Terraform Plan
-        id: plan
+        id: gha-plan
         run: |
           cd trf_cloud
           terraform plan -no-color
@@ -78,11 +78,11 @@ jobs:
       - name: check plan outcome
         run: |
           echo "1"
-          echo ${{ steps.plan.outcome }}
+          echo ${{ steps.gha-plan.outcome }}
           echo "2"
-          echo ${{ steps.plan.outputs.stdout }}
+          echo ${{ steps.gha-plan.outputs.stdout }}
           echo "3"
-          echo ${{ steps.plan.outputs }}
+          echo ${{ steps.gha-plan.outputs }}
 
       - name: setup-terraform ver
         uses: hashicorp/setup-terraform@v2
