@@ -1,0 +1,147 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ap-northeast-2
+  GIT_BRANCH_NAME: ${{ github.ref_name }}
+  TF_CLI_ARGS_plan: -parallelism=40
+  TF_TOKEN_app_terraform_io: ${{ secrets.TFE_TOKEN }} # https://developer.hashicorp.com/terraform/cli/config/config-file#environment-variable-credentials
+
+jobs:
+  pr_check:
+    name: pr_check
+    runs-on: ubuntu-latest
+    outputs: # https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs
+      pr: ${{ steps.findPr.outputs.pr }}
+      number: ${{ steps.findPr.outputs.number }}
+
+    steps:
+      - name: get PR number
+        uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        if: always() # Pick up events even if the job fails or is canceled.
+        with:
+          state: open
+
+      - name: PR checker
+        env:
+          PR: ${{ steps.findPr.outputs.pr }}
+        if: ${{ steps.findPr.outputs.pr == '' }}
+        run: echo "There's no pr" && exit 1
+
+  build:
+    name: Terraform planner
+    runs-on: ubuntu-latest
+    needs: pr_check
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set environment variables
+        id: setenv
+        run: |
+          LOCAL_BRANCH_NAME='${{ env.GIT_BRANCH_NAME }}'
+          echo "VPC_NAME=${LOCAL_BRANCH_NAME%/*}" >> $GITHUB_ENV
+          echo 'VPCS=${{ env.VPCS }}' >> $GITHUB_ENV
+
+      - name: Terraform format
+        id: fmt
+        run: |
+          pwd
+          cd trf_cloud
+          terraform fmt
+
+      - name: Terraform init
+        id: init
+        run: |
+          pwd
+          cd trf_cloud
+          terraform init
+
+      - name: Terraform validate
+        id: validate
+        run: |
+          pwd
+          cd trf_cloud
+          terraform validate
+
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: |
+      #     echo 'plan<<EOF' >> $GITHUB_OUTPUT
+      #     if [[ "${{ env.VPC_NAME }}" == "all" ]]; then 
+      #       for VPC in ${VPCS//,/ }; do
+      #         cd aws-${VPC}
+      #         terraform plan -out ${VPC}.tfplan
+      #         echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ${VPC} =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $GITHUB_OUTPUT
+      #         terraform show ${VPC}.tfplan -no-color >> $GITHUB_OUTPUT
+      #         cd ..
+      #       done
+      #     else
+      #       cd aws-${VPC_NAME}
+      #       terraform plan -out ${VPC_NAME}.tfplan
+      #       echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ${VPC_NAME} =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $GITHUB_OUTPUT
+      #       terraform show ${VPC_NAME}.tfplan -no-color >> $GITHUB_OUTPUT
+      #       cd ..
+      #     fi
+      #     echo 'EOF' >> $GITHUB_OUTPUT
+      #   continue-on-error: true
+
+      # - name: Set sha1 short
+      #   id: sha1 # steps.sha1.outputs.short
+      #   run: |
+      #     echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      # - name: comment output on PR
+      #   uses: actions/github-script@v6
+      #   if: always() && needs.pr_check.outputs.pr
+      #   env:
+      #     GITHUB_ISSUE_NUMBER: ${{ needs.pr_check.outputs.pr }}
+      #   with:
+      #     github-token: ${{secrets.GIT_HUB_TOKEN}}
+      #     script: | 
+      #       const emojiObj = {
+      #           'success': ':white_check_mark:',
+      #           'failure': ':x:',
+      #           'cancelled': ':fast_forward:(cancel)',
+      #           'skipped': ':eject_button:(skip)'
+      #       }
+            
+      #       let output = `_${{ github.event.commits[0].message }}_ [${{ steps.sha1.outputs.short }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) ` +
+      #         `_Format_ ${emojiObj['${{ steps.fmt.outcome }}']}, ` +
+      #         `_Init_ ${emojiObj['${{ steps.init.outcome }}']}, ` + 
+      #         `_Validate_ ${emojiObj['${{ steps.validate.outcome }}']}, ` +
+      #         `_Plan_ ${emojiObj['${{ steps.plan.outcome }}']} `
+      #       if ('${{ steps.plan.outcome }}' == 'success') {
+      #         output = `${output}
+
+      #         <details><summary>Show Plan Details</summary>
+
+      #         \`\`\`
+      #         ${{ steps.plan.outputs.plan }}
+      #         \`\`\`
+
+      #         </details>`
+      #       }
+
+      #       await github.rest.issues.createComment({
+      #         issue_number: process.env.GITHUB_ISSUE_NUMBER,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: output
+      #       })
+
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1

@@ -3,7 +3,7 @@ resource "random_string" "tcl_bwdwanch" {
   special = true
 }
 
-resource "random_string" "action_wwdwdwweer" {
+resource "random_string" "acwdwdwddwweer" {
   length  = 10
   special = true
 }
