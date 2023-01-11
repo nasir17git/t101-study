@@ -37,52 +37,52 @@ jobs:
     # needs: pr_check
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      # - name: Checkout
+      #   uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+      #     aws-region: ${{ env.AWS_REGION }}
 
-      - name: Terraform format
-        id: fmt
-        run: |
-          pwd
-          cd trf_cloud
-          terraform fmt
+      # - name: Terraform format
+      #   id: fmt
+      #   run: |
+      #     pwd
+      #     cd trf_cloud
+      #     terraform fmt
 
-      - name: Terraform init
-        id: init
-        run: |
-          pwd
-          cd trf_cloud
-          terraform init
+      # - name: Terraform init
+      #   id: init
+      #   run: |
+      #     pwd
+      #     cd trf_cloud
+      #     terraform init
 
-      - name: Terraform validate
-        id: validate
-        run: |
-          pwd
-          cd trf_cloud
-          terraform validate
+      # - name: Terraform validate
+      #   id: validate
+      #   run: |
+      #     pwd
+      #     cd trf_cloud
+      #     terraform validate
 
-      - name: Terraform Plan
-        id: gha-plan
-        run: |
-          cd trf_cloud
-          terraform plan -no-color
-        continue-on-error: true
+      # - name: Terraform Plan
+      #   id: gha-plan
+      #   run: |
+      #     cd trf_cloud
+      #     terraform plan -no-color
+      #   continue-on-error: true
 
-      - name: check plan outcome
-        run: |
-          echo "1"
-          echo ${{ steps.gha-plan.outcome }}
-          echo "2"
-          echo ${{ steps.gha-plan.outputs.stdout }}
-          echo "3"
-          echo ${{ steps.gha-plan.outputs }}
+      # - name: check plan outcome
+      #   run: |
+      #     echo "1"
+      #     echo ${{ steps.gha-plan.outcome }}
+      #     echo "2"
+      #     echo ${{ steps.gha-plan.outputs.stdout }}
+      #     echo "3"
+      #     echo ${{ steps.gha-plan.outputs }}
 
       - name: setup-terraform ver
         uses: hashicorp/setup-terraform@v2
@@ -91,19 +91,25 @@ jobs:
           terraform_wrapper: true
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - run: |
+      - name: init
+        run: |
           pwd
           cd trf_cloud
           terraform init
 
-      - id: plan
+      - name: plan
+        id: plan
         run: |
           cd trf_cloud
           terraform plan -no-color
 
-      - run: echo ${{ steps.plan.outputs.stdout }}
-      - run: echo ${{ steps.plan.outputs.stderr }}
-      - run: echo ${{ steps.plan.outputs.exitcode }}
+      - name: get plan result
+        id: plan_result
+        run: |
+          echo ${{ steps.plan.outputs.stdout }} >> full.txt
+          echo "RESULT=$(sed -n '/Plan:/p' full.txt ; sed -n '/No changes./p' full.txt)" >> $GITHUB_ENV
+          echo ${{ env.RESULT }}
+
       # - name: comment output on PR
       #   uses: actions/github-script@v6
       #   if: always() && needs.pr_check.outputs.pr
