@@ -108,7 +108,7 @@ jobs:
         run: |
           echo "${{ steps.plan.outputs.stdout }}" >> full.txt
           echo "RESULT=$(sed -n '/Plan:/p' full.txt ; sed -n '/No changes./p' full.txt)" >> $GITHUB_ENV
-          echo ${{ env.RESULT }}
+          echo $RESULT
 
       # - name: comment output on PR
       #   uses: actions/github-script@v6
