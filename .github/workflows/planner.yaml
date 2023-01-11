@@ -84,6 +84,26 @@ jobs:
           echo "3"
           echo ${{ steps.plan.outputs }}
 
+      - name: setup-terraform ver
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.9
+          terraform_wrapper: true
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - run: |
+          pwd
+          cd trf_cloud
+          terraform init
+
+      - id: plan
+        run: |
+          cd trf_cloud
+          terraform plan -no-color
+
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
       # - name: comment output on PR
       #   uses: actions/github-script@v6
       #   if: always() && needs.pr_check.outputs.pr
