@@ -77,11 +77,11 @@ jobs:
 
       - name: check plan outcome
         run: |
-          1
+          echo "1"
           echo {{ steps.plan.outcome }}
-          2
+          echo "2"
           echo ${{ steps.plan.outputs.stdout }}
-          3
+          echo "3"
           echo ${{ steps.plan.outputs }}
 
       # - name: comment output on PR
