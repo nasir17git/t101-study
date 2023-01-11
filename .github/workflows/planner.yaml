@@ -78,7 +78,7 @@ jobs:
       - name: check plan outcome
         run: |
           echo "1"
-          echo {{ steps.plan.outcome }}
+          echo ${{ steps.plan.outcome }}
           echo "2"
           echo ${{ steps.plan.outputs.stdout }}
           echo "3"
