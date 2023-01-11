@@ -7,7 +7,6 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   GIT_BRANCH_NAME: ${{ github.ref_name }}
-  TF_CLI_ARGS_plan: -parallelism=40
   TF_TOKEN_app_terraform_io: ${{ secrets.TFE_TOKEN }} # https://developer.hashicorp.com/terraform/cli/config/config-file#environment-variable-credentials
 
 jobs:
