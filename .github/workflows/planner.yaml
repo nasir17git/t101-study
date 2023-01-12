@@ -107,7 +107,7 @@ jobs:
         id: result
         run: |
           echo 'RESULT<<EOF' >> $GITHUB_ENV
-          echo ${{ steps.plan.outputs.stdout }} >> $GITHUB_ENV
+          ${{ steps.plan.outputs.stdout }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: cut to 1 sentence
