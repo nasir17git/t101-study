@@ -97,17 +97,18 @@ jobs:
           cd trf_cloud
           terraform init
 
-      - name: plan
-        id: plan
-        run: |
-          cd trf_cloud
-          terraform plan -no-color
+      # - name: plan
+      #   id: plan
+      #   run: |
+      #     cd trf_cloud
+      #     terraform plan -no-color
 
       - name: save plan result
         id: result
         run: |
+          cd trf_cloud
           echo 'RESULT<<EOF' >> $GITHUB_ENV
-          ${{ steps.plan.outputs.stdout }} >> $GITHUB_ENV
+          terraform plan -no-color >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: cut to 1 sentence
