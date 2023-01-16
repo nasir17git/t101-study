@@ -13,79 +13,79 @@ jobs:
     name: "ext plan"
     runs-on: ubuntu-latest
     outputs:
-      result: "false"
-      url: "https://google.com"
-      # result: ${{ steps.ext-run.outputs.has-changes }}
-      # url: ${{ steps.ext-run.outputs.run-url }}
+      # result: "false"
+      # url: "https://google.com"
+      result: ${{ steps.ext-run.outputs.has-changes }}
+      url: ${{ steps.ext-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - uses: kvrhdn/tfe-run@v1
-      #   id: ext-run
-      #   with:
-      #     token: ${{ secrets.TFE_TOKEN }}
-      #     organization: org-test-221226
-      #     workspace: trf_cloud
-      #     type: plan
-      #     wait-for-completion: true
-      #     message: |
-      #       Run triggered using tfe-run (commit: ${{ github.SHA }})
+      - uses: kvrhdn/tfe-run@v1
+        id: ext-run
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: trf_cloud
+          type: plan
+          wait-for-completion: true
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
 
-      # - name: result check
-      #   run: echo "${{ steps.ext-run.outputs.has-changes }}"
+      - name: result check
+        run: echo "${{ steps.ext-run.outputs.has-changes }}"
 
   workspace2_lds:
     name: "lds plan"
     runs-on: ubuntu-latest
     outputs:
-      result: "false"
-      url: "https://google.com"
-      # result: ${{ steps.lds-run.outputs.has-changes }}
-      # url: ${{ steps.lds-run.outputs.run-url }}
+      # result: "false"
+      # url: "https://google.com"
+      result: ${{ steps.lds-run.outputs.has-changes }}
+      url: ${{ steps.lds-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - uses: kvrhdn/tfe-run@v1
-      #   id: lds-run
-      #   with:
-      #     token: ${{ secrets.TFE_TOKEN }}
-      #     organization: org-test-221226
-      #     workspace: add_ec2
-      #     type: plan
-      #     wait-for-completion: true
-      #     message: |
-      #       Run triggered using tfe-run (commit: ${{ github.SHA }})
+      - uses: kvrhdn/tfe-run@v1
+        id: lds-run
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: add_ec2
+          type: plan
+          wait-for-completion: true
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
       
-      # - name: result check
-      #   run: echo "${{ steps.lds-run.outputs.has-changes }}"
+      - name: result check
+        run: echo "${{ steps.lds-run.outputs.has-changes }}"
 
   workspace3_qa:
     name: "qa plan"
     runs-on: ubuntu-latest
     outputs:
-      result: "false"
-      url: "https://google.com"
-      # result: ${{ steps.qa-run.outputs.has-changes }}
-      # url: ${{ steps.qa-run.outputs.run-url }}
+      # result: "false"
+      # url: "https://google.com"
+      result: ${{ steps.qa-run.outputs.has-changes }}
+      url: ${{ steps.qa-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - uses: kvrhdn/tfe-run@v1
-      #   id: qa-run
-      #   with:
-      #     token: ${{ secrets.TFE_TOKEN }}
-      #     organization: org-test-221226
-      #     workspace: error
-      #     type: plan
-      #     wait-for-completion: true
-      #     message: |
-      #       Run triggered using tfe-run (commit: ${{ github.SHA }})
+      - uses: kvrhdn/tfe-run@v1
+        id: qa-run
+        with:
+          token: ${{ secrets.TFE_TOKEN }}
+          organization: org-test-221226
+          workspace: error
+          type: plan
+          wait-for-completion: true
+          message: |
+            Run triggered using tfe-run (commit: ${{ github.SHA }})
 
-      # - name: result check
-      #   run: echo "${{ steps.qa-run.outputs.has-changes }}"
+      - name: result check
+        run: echo "${{ steps.qa-run.outputs.has-changes }}"
 
   slack_alert:
     name: slack_alert
