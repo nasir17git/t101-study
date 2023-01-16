@@ -13,10 +13,10 @@ jobs:
     name: "ext plan"
     runs-on: ubuntu-latest
     outputs:
-      ext_result: "false"
-      ext_url: "https://google.com"
-      # ext_result: ${{ steps.ext-run.outputs.has-changes }}
-      # ext_url: ${{ steps.ext-run.outputs.run-url }}
+      result: "false"
+      url: "https://google.com"
+      # result: ${{ steps.ext-run.outputs.has-changes }}
+      # url: ${{ steps.ext-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,10 +39,10 @@ jobs:
     name: "lds plan"
     runs-on: ubuntu-latest
     outputs:
-      lds_result: "false"
-      lds_url: "https://google.com"
-      # lds_result: ${{ steps.lds-run.outputs.has-changes }}
-      # lds_url: ${{ steps.lds-run.outputs.run-url }}
+      result: "false"
+      url: "https://google.com"
+      # result: ${{ steps.lds-run.outputs.has-changes }}
+      # url: ${{ steps.lds-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -65,10 +65,10 @@ jobs:
     name: "qa plan"
     runs-on: ubuntu-latest
     outputs:
-      qa_result: "false"
-      qa_url: "https://google.com"
-      # qa_result: ${{ steps.qa-run.outputs.has-changes }}
-      # qa_url: ${{ steps.qa-run.outputs.run-url }}
+      result: "false"
+      url: "https://google.com"
+      # result: ${{ steps.qa-run.outputs.has-changes }}
+      # url: ${{ steps.qa-run.outputs.run-url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -98,7 +98,7 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-          if [[ "${{ needs.workspace1_ext.outputs.ext_result }}" == "${{ needs.workspace2_lds.outputs.lds_result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.lds_result }}" == "${{ needs.workspace3_qa.outputs.qa_result }}" ]]; then
+          if [[ "${{ needs.workspace1_ext.outputs.result }}" == "${{ needs.workspace2_lds.outputs.result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.result }}" == "${{ needs.workspace3_qa.outputs.result }}" ]]; then
             echo "STATUS=#008000" >> $GITHUB_ENV
           else
             echo "STATUS=#FF0000" >> $GITHUB_ENV
@@ -137,7 +137,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
+                        "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.result }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -145,14 +145,14 @@ jobs:
                           "type": "plain_text",
                           "text": "View"
                         },
-                        "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
+                        "url": "${{ needs.workspace1_ext.outputs.url }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
+                        "text": "*lds status?*\n${{ needs.workspace2_lds.outputs.result }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -160,14 +160,14 @@ jobs:
                           "type": "plain_text",
                           "text": "View"
                         },
-                        "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
+                        "url": "${{ needs.workspace2_lds.outputs.url }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
+                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.result }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -175,7 +175,7 @@ jobs:
                           "type": "plain_text",
                           "text": "View"
                         },
-                        "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
+                        "url": "${{ needs.workspace3_qa.outputs.url }}"
                       }
                     }
                   ]
