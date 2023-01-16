@@ -141,7 +141,6 @@ jobs:
                       },
                       "accessory": {
                         "type": "button",
-                        "action_id": "ext_button",
                         "text": {
                           "type": "plain_text",
                           "text": "View",
