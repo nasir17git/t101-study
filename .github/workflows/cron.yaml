@@ -13,8 +13,8 @@ jobs:
     name: "ext plan"
     runs-on: ubuntu-latest
     outputs:
-      ext_result: false
-      ext_url: google.com
+      ext_result: "false"
+      ext_url: "google.com"
       # ext_result: ${{ steps.ext-run.outputs.has-changes }}
       # ext_url: ${{ steps.ext-run.outputs.run-url }}
     steps:
@@ -39,8 +39,8 @@ jobs:
     name: "lds plan"
     runs-on: ubuntu-latest
     outputs:
-      lds_result: false
-      lds_url: google.com
+      lds_result: "false"
+      lds_url: "google.com"
       # lds_result: ${{ steps.lds-run.outputs.has-changes }}
       # lds_url: ${{ steps.lds-run.outputs.run-url }}
     steps:
@@ -65,8 +65,8 @@ jobs:
     name: "qa plan"
     runs-on: ubuntu-latest
     outputs:
-      qa_result: false
-      qa_url: google.com
+      qa_result: "false"
+      qa_url: "google.com"
       # qa_result: ${{ steps.qa-run.outputs.has-changes }}
       # qa_url: ${{ steps.qa-run.outputs.run-url }}
     steps:
