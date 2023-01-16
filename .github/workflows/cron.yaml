@@ -145,7 +145,7 @@ jobs:
                           "type": "plain_text",
                           "text": "View",
                         },
-                        "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
+                        "value": "${{ needs.workspace1_ext.outputs.ext_url }}"
                       }
                     }
                   ]
