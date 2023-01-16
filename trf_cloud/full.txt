@@ -79,7 +79,7 @@ Terraform will perform the following actions:
       + upper       = true
     }
 
-Plan: 1 to add, 0 to change, 1 to destroy.
+Pan: 1 to add, 0 to change, 1 to destroy.
 No changes. Your infrastructure matches the configuration.
 ------------------------------------------------------------------------
 

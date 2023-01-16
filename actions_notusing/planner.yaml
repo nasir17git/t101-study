@@ -123,10 +123,12 @@ jobs:
             echo $RESULT
           fi
 
-# > 한번 데이터를 뿌린 다음에 추출?출력?을 작업하는게 마음에 걸림
+> 한번 데이터를 뿌린 다음에 추출?출력?을 작업하는게 마음에 걸림
 
-# full.txt << ${{ steps.plan.outputs.stdout }} 반대로해야하나?
-# 아니면 EOF?
+${{ steps.plan.outputs.stdout }}
+
+full.txt << ${{ steps.plan.outputs.stdout }} 반대로해야하나?
+아니면 EOF?
       # - name: comment output on PR
       #   uses: actions/github-script@v6
       #   if: always() && needs.pr_check.outputs.pr
