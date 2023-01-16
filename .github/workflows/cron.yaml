@@ -102,7 +102,7 @@ jobs:
           echo $same_value
           for i in "${{ needs.*.outputs.result }}"
           do
-            if [[ i != i ]]; then
+            if [[ i != "false" ]]; then
             same_value = 0
             break
             fi
