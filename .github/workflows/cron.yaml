@@ -65,7 +65,7 @@ jobs:
     name: "qa plan"
     runs-on: ubuntu-latest
     outputs:
-      qa_result: "false"
+      qa_result: "true"
       qa_url: google.com
       # qa_result: ${{ steps.qa-run.outputs.has-changes }}
       # qa_url: ${{ steps.qa-run.outputs.run-url }}
