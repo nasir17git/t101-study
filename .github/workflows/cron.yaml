@@ -99,95 +99,91 @@ jobs:
         id: check
         run: |
           if [[ "${{ needs.workspace1_ext.outputs.ext_result }}" == "${{ needs.workspace2_lds.outputs.lds_result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.lds_result }}" == "${{ needs.workspace3_qa.outputs.qa_result }}" ]]; then
-            echo "All outputs are same"
+            echo "STATUS=good" >> $GITHUB_ENV
           else
-            echo "there are difference"
+            echo "STATUS=bad" >> $GITHUB_ENV
           fi
-      # - name: Send custom JSON data to Slack workflow
-      #   id: slack
-      #   uses: slackapi/slack-github-action@v1.23.0
-      #   with:
-      #     # For posting a rich message using Block Kit
-      #     payload: |
-      #       {
-      #         "blocks": [
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "Danny Torrence left the following review for your property:"
-      #             }
-      #           },
-      #           {
-      #             "type": "section",
-      #             "block_id": "section567",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
-      #             },
-      #             "accessory": {
-      #               "type": "image",
-      #               "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
-      #               "alt_text": "Haunted hotel image"
-      #             }
-      #           },
-      #           {
-      #             "type": "section",
-      #             "block_id": "section789",
-      #             "fields": [
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "*Average Rating*\n1.0"
-      #               }
-      #             ]
-      #           }
-      #         ],
-      #       	"attachments": [
-      #       		{
-      #       			"blocks": [
-      #       				{
-      #       					"type": "section",
-      #       					"text": {
-      #       						"type": "mrkdwn",
-      #       						"text": "*Alternative hotel options*"
-      #       					}
-      #       				},
-      #       				{
-      #       					"type": "section",
-      #       					"text": {
-      #       						"type": "mrkdwn",
-      #       						"text": "<https://example.com|Bates Motel> :star::star:"
-      #       					},
-      #       					"accessory": {
-      #       						"type": "button",
-      #       						"text": {
-      #       							"type": "plain_text",
-      #       							"text": "View",
-      #       							"emoji": true
-      #       						},
-      #       						"value": "view_alternate_1"
-      #       					}
-      #       				},
-      #       				{
-      #       					"type": "section",
-      #       					"text": {
-      #       						"type": "mrkdwn",
-      #       						"text": "<https://example.com|The Great Northern Hotel> :star::star::star::star:"
-      #       					},
-      #       					"accessory": {
-      #       						"type": "button",
-      #       						"text": {
-      #       							"type": "plain_text",
-      #       							"text": "View",
-      #       							"emoji": true
-      #       						},
-      #       						"value": "view_alternate_2"
-      #       					}
-      #       				}
-      #       			]
-      #       		}
-      #       	]
-      #       }
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${{ env.DATE }} Terraform Health Check"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "변경사항을 감지하여, 없으면 > false / 있으면 > true"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ],
+              "attachments" [
+                {
+                  "blocks" : [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "action_id": "ext_button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View"
+                        },
+                        "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
+                      }
+                    },    
+                    {    
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "action_id": "lds_button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View"
+                        },
+                        "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
+                      }
+                    },    
+                    {    
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "action_id": "qa_button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View"
+                        },
+                        "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
