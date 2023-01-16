@@ -98,7 +98,7 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-        if [[ ${{ steps.ext-run.outputs.has-changes }} == ${{ steps.lds-run.outputs.has-changes }} ]] && [[${{ steps.lds-run.outputs.has-changes }} == ${{ steps.qa-run.outputs.has-changes }}]]; then
+        if [[ "${{ steps.ext-run.outputs.has-changes }}" == "${{ steps.lds-run.outputs.has-changes }}" ]] && [[ "${{ steps.lds-run.outputs.has-changes }}" == "${{ steps.qa-run.outputs.has-changes }}" ]]; then
           echo "All outputs are same"
         else
           echo "there are difference"
