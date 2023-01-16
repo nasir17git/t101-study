@@ -144,7 +144,7 @@ jobs:
               ],
             	"attachments": [
             		{
-                  "color" : "good"
+                  "color" : "good",
             			"blocks": [
             				{
             					"type": "section",
