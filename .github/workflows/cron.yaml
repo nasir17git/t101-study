@@ -98,24 +98,26 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-          same_value=1
-          echo $same_value
-          echo "${{ needs.*.outputs.result }}"
-          for i in "${{ needs.*.outputs.result }}"
-          do
-            if [[ i != "false" ]]; then
-            same_value = 0
-            break
-            fi
-          done
-
-          if [[ same_value -eq 1 ]]; then
+          if [[ "${{ needs.workspace1_ext.outputs.result }}" == "${{ needs.workspace2_lds.outputs.result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.result }}" == "${{ needs.workspace3_qa.outputs.result }}" ]]; then
             echo "STATUS=#008000" >> $GITHUB_ENV
           else
             echo "STATUS=#FF0000" >> $GITHUB_ENV
-          fi   
+          fi
 
-          echo $STATUS         
+          if [[ "${{ needs.workspace1_ext.outputs.result }}" == "false" ]]; then
+            echo "ext_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
+          else
+            echo "ext_STATUS=:icon_error: Bad" >> $GITHUB_ENV
+
+          if [[ "${{ needs.workspace2_lds.outputs.result }}" == "false" ]]; then
+            echo "lds_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
+          else
+            echo "lds_STATUS=:icon_error: Bad" >> $GITHUB_ENV
+
+          if [[ "${{ needs.workspace3_qa.outputs.result }}" == "false" ]]; then
+            echo "qa_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
+          else
+            echo "qa_STATUS=:icon_error: Bad" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -151,7 +153,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.result }}"
+                        "text": "*ext has changes?*\n${{ env.ext_STATUS }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -166,7 +168,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*lds status?*\n${{ needs.workspace2_lds.outputs.result }}"
+                        "text": "*lds status?*\n${{ env.lds_STATUS }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -181,7 +183,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.result }}"
+                        "text": "*qa has changes?*\n${{ env.qa_STATUS }}"
                       },
                       "accessory": {
                         "type": "button",
