@@ -99,9 +99,9 @@ jobs:
         id: check
         run: |
           if [[ "${{ needs.workspace1_ext.outputs.ext_result }}" == "${{ needs.workspace2_lds.outputs.lds_result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.lds_result }}" == "${{ needs.workspace3_qa.outputs.qa_result }}" ]]; then
-            echo "STATUS=good" >> $GITHUB_ENV
+            echo "STATUS=#008000" >> $GITHUB_ENV
           else
-            echo "STATUS=danger" >> $GITHUB_ENV
+            echo "STATUS=#FF0000" >> $GITHUB_ENV
           fi
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -144,7 +144,7 @@ jobs:
               ],
             	"attachments": [
             		{
-            			"color": "#439FE0",
+            			"color": "${{ env.STATUS }}",
             			"blocks": [
             				{
             					"type": "section",
