@@ -121,7 +121,7 @@ jobs:
           else
             echo "qa_STATUS=:icon_error: Bad" >> $GITHUB_ENV
           fi
-          
+
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
@@ -141,7 +141,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "plain_text",
-                    "text": "변경사항을 감지하여, 없으면 > false / 있으면 > true"
+                    "text": "주중 오전9시에 plan하여 실제 AWS환경과 terraform 구성파일간의 차이 여부를 알려줍니다."
                   }
                 },
                 {
@@ -156,7 +156,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*ext has changes?*\n${{ env.ext_STATUS }}"
+                        "text": "*ext status?*\n${{ env.ext_STATUS }}"
                       },
                       "accessory": {
                         "type": "button",
@@ -186,7 +186,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*qa has changes?*\n${{ env.qa_STATUS }}"
+                        "text": "*qa status?*\n${{ env.qa_STATUS }}"
                       },
                       "accessory": {
                         "type": "button",
