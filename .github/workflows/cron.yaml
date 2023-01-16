@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       ext_result: "false"
-      ext_url: "google.com"
+      ext_url: "https://google.com"
       # ext_result: ${{ steps.ext-run.outputs.has-changes }}
       # ext_url: ${{ steps.ext-run.outputs.run-url }}
     steps:
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       lds_result: "false"
-      lds_url: "google.com"
+      lds_url: "https://google.com"
       # lds_result: ${{ steps.lds-run.outputs.has-changes }}
       # lds_url: ${{ steps.lds-run.outputs.run-url }}
     steps:
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       qa_result: "true"
-      qa_url: google.com
+      qa_url: "https://google.com"
       # qa_result: ${{ steps.qa-run.outputs.has-changes }}
       # qa_url: ${{ steps.qa-run.outputs.run-url }}
     steps:
@@ -143,7 +143,7 @@ jobs:
                         "type": "button",
                         "text": {
                           "type": "plain_text",
-                          "text": "View",
+                          "text": "View"
                         },
                         "value": "${{ needs.workspace1_ext.outputs.ext_url }}"
                       }
