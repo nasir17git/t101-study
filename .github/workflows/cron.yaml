@@ -99,7 +99,7 @@ jobs:
         id: check
         run: |
           echo "SAME=1"
-          for i in "${{ needs.*.outputs.result }}"
+          for i in "${{ needs.[@].outputs.result }}"
           do
             echo ${i}
           done
