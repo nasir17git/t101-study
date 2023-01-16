@@ -13,7 +13,7 @@ jobs:
     name: "ext plan"
     runs-on: ubuntu-latest
     outputs:
-      result: "false"
+      result: "true"
       url: "https://google.com"
       # result: ${{ steps.ext-run.outputs.has-changes }}
       # url: ${{ steps.ext-run.outputs.run-url }}
@@ -102,7 +102,7 @@ jobs:
           echo $same_value
           for i in "${{ needs.*.outputs.result }}"
           do
-            if [[ i != "false" ]]; then
+            if [[ i != i ]]; then
             same_value = 0
             break
             fi
