@@ -98,11 +98,11 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-        if [[ "${{ steps.ext-run.outputs.has-changes }}" == "${{ steps.lds-run.outputs.has-changes }}" ]] && [[ "${{ steps.lds-run.outputs.has-changes }}" == "${{ steps.qa-run.outputs.has-changes }}" ]]; then
-          echo "All outputs are same"
-        else
-          echo "there are difference"
-        fi
+          if [[ "${{ steps.ext-run.outputs.has-changes }}" == "${{ steps.lds-run.outputs.has-changes }}" ]] && [[ "${{ steps.lds-run.outputs.has-changes }}" == "${{ steps.qa-run.outputs.has-changes }}" ]]; then
+            echo "All outputs are same"
+          else
+            echo "there are difference"
+          fi
       # - name: Send custom JSON data to Slack workflow
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.23.0
