@@ -100,9 +100,10 @@ jobs:
         run: |
           same_value=1
           echo $same_value
+          echo "${{ needs.*.outputs.result }}"
           for i in "${{ needs.*.outputs.result }}"
           do
-            if [[ i != i ]]; then
+            if [[ i != "false" ]]; then
             same_value = 0
             break
             fi
