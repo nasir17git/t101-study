@@ -129,61 +129,29 @@ jobs:
                   "type": "divider"
                 }
               ],
-            	"attachments": [
-            		{
-            			"color": "${{ env.STATUS }}",
-            			"blocks": [
-            				{
-            					"type": "section",
-            					"text": {
-            						"type": "mrkdwn",
-            						"text": "<https://example.com|Bates Motel> :star::star:"
-            					},
-            					"accessory": {
-            						"type": "button",
-            						"text": {
-            							"type": "plain_text",
-            							"text": "View",
-            							"emoji": true
-            						},
-            						"value": "view_alternate_1"
-            					}
-            				},
-            				{
-            					"type": "section",
-            					"text": {
-            						"type": "mrkdwn",
-            						"text": "<https://example.com|Bates Motel> :star::star:"
-            					},
-            					"accessory": {
-            						"type": "button",
-            						"text": {
-            							"type": "plain_text",
-            							"text": "View",
-            							"emoji": true
-            						},
-            						"value": "view_alternate_1"
-            					}
-            				},
-            				{
-            					"type": "section",
-            					"text": {
-            						"type": "mrkdwn",
-            						"text": "<https://example.com|Bates Motel> :star::star:"
-            					},
-            					"accessory": {
-            						"type": "button",
-            						"text": {
-            							"type": "plain_text",
-            							"text": "View",
-            							"emoji": true
-            						},
-            						"value": "view_alternate_1"
-            					}
-            				}
-            			]
-            		}
-            	]
+              "attachments": [
+                {
+                  "color": "${{ env.STATUS }}",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "<https://example.com|Bates Motel> \n:star::star:"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View",
+                          "emoji": true
+                        },
+                        "value": "view_alternate_1"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
