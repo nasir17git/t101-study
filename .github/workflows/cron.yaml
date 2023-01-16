@@ -147,6 +147,36 @@ jobs:
                         },
                         "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
                       }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View"
+                        },
+                        "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
+                      },
+                      "accessory": {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View"
+                        },
+                        "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
+                      }
                     }
                   ]
                 }
