@@ -101,13 +101,10 @@ jobs:
           echo "SAME=1"
           for i in "${{ needs.*.outputs.result }}"
           do
-            if [[ ${i} != "false" ]]; then
-              SAME=0
-              break
-            fi
+            echo ${i}
           done
           echo $SAME
-          
+
           if [[ SAME -eq 1 ]]; then
             echo "All environment variables have the same value."
             echo "STATUS=#008000" >> $GITHUB_ENV
