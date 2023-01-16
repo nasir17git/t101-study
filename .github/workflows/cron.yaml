@@ -98,11 +98,24 @@ jobs:
       - name: Check for changes
         id: check
         run: |
-          if [[ "${{ needs.workspace1_ext.outputs.result }}" == "${{ needs.workspace2_lds.outputs.result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.result }}" == "${{ needs.workspace3_qa.outputs.result }}" ]]; then
+          same_value=1
+          echo $same_value
+          for i in "${{ needs.*.outputs.result }}"
+          do
+            if [[ i != i ]]; then
+            same_value = 0
+            break
+            fi
+          done
+
+          if [[ same_value -eq 1 ]]; then
             echo "STATUS=#008000" >> $GITHUB_ENV
           else
             echo "STATUS=#FF0000" >> $GITHUB_ENV
-          fi
+          fi   
+
+          echo $STATUS         
+
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
