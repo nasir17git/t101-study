@@ -137,16 +137,16 @@ jobs:
             					"type": "section",
             					"text": {
             						"type": "mrkdwn",
-            						"text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
+            						"text": "<https://example.com|Bates Motel> :star::star:"
             					},
             					"accessory": {
             						"type": "button",
-            						"action_id": "ext_button",
             						"text": {
             							"type": "plain_text",
             							"text": "View",
+            							"emoji": true
             						},
-            						"url": "${{ needs.workspace1_ext.outputs.ext_url }}"
+            						"value": "view_alternate_1"
             					}
             				},
             				{
