@@ -108,17 +108,20 @@ jobs:
             echo "ext_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
           else
             echo "ext_STATUS=:icon_error: Bad" >> $GITHUB_ENV
+          fi
 
           if [[ "${{ needs.workspace2_lds.outputs.result }}" == "false" ]]; then
             echo "lds_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
           else
             echo "lds_STATUS=:icon_error: Bad" >> $GITHUB_ENV
+          fi
 
           if [[ "${{ needs.workspace3_qa.outputs.result }}" == "false" ]]; then
             echo "qa_STATUS=:white_check_mark: Good" >> $GITHUB_ENV
           else
             echo "qa_STATUS=:icon_error: Bad" >> $GITHUB_ENV
-
+          fi
+          
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
