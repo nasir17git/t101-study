@@ -137,7 +137,16 @@ jobs:
             					"type": "section",
             					"text": {
             						"type": "mrkdwn",
-            						"text": "*Alternative hotel options*"
+            						"text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
+            					},
+            					"accessory": {
+            						"type": "button",
+            						"action_id": "ext_button",,
+            						"text": {
+            							"type": "plain_text",
+            							"text": "View",
+            						},
+            						"url": "${{ needs.workspace1_ext.outputs.ext_url }}"
             					}
             				},
             				{
@@ -160,7 +169,7 @@ jobs:
             					"type": "section",
             					"text": {
             						"type": "mrkdwn",
-            						"text": "<https://example.com|The Great Northern Hotel> :star::star::star::star:"
+            						"text": "<https://example.com|Bates Motel> :star::star:"
             					},
             					"accessory": {
             						"type": "button",
@@ -169,7 +178,7 @@ jobs:
             							"text": "View",
             							"emoji": true
             						},
-            						"value": "view_alternate_2"
+            						"value": "view_alternate_1"
             					}
             				}
             			]
