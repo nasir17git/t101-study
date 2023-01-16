@@ -101,7 +101,7 @@ jobs:
           if [[ "${{ needs.workspace1_ext.outputs.ext_result }}" == "${{ needs.workspace2_lds.outputs.lds_result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.lds_result }}" == "${{ needs.workspace3_qa.outputs.qa_result }}" ]]; then
             echo "STATUS=good" >> $GITHUB_ENV
           else
-            echo "STATUS=bad" >> $GITHUB_ENV
+            echo "STATUS=danger" >> $GITHUB_ENV
           fi
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -128,61 +128,61 @@ jobs:
                 {
                   "type": "divider"
                 }
-              ],
-              "attachments" [
-                {
-                  "blocks" : [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
-                      },
-                      "accessory": {
-                        "type": "button",
-                        "action_id": "ext_button",
-                        "text": {
-                          "type": "plain_text",
-                          "text": "View"
-                        },
-                        "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
-                      }
-                    },    
-                    {    
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
-                      },
-                      "accessory": {
-                        "type": "button",
-                        "action_id": "lds_button",
-                        "text": {
-                          "type": "plain_text",
-                          "text": "View"
-                        },
-                        "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
-                      }
-                    },    
-                    {    
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
-                      },
-                      "accessory": {
-                        "type": "button",
-                        "action_id": "qa_button",
-                        "text": {
-                          "type": "plain_text",
-                          "text": "View"
-                        },
-                        "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
-                      }
-                    }
-                  ]
-                }
               ]
+              # "attachments": [
+              #   {
+              #     "blocks" : [
+              #       {
+              #         "type": "section",
+              #         "text": {
+              #           "type": "mrkdwn",
+              #           "text": "*ext has changes?*\n${{ needs.workspace1_ext.outputs.ext_result }}"
+              #         },
+              #         "accessory": {
+              #           "type": "button",
+              #           "action_id": "ext_button",
+              #           "text": {
+              #             "type": "plain_text",
+              #             "text": "View"
+              #           },
+              #           "url": "${{ needs.workspace1_ext.outputs.ext_url }}"
+              #         }
+              #       },    
+              #       {    
+              #         "type": "section",
+              #         "text": {
+              #           "type": "mrkdwn",
+              #           "text": "*lds has changes?*\n${{ needs.workspace2_lds.outputs.lds_result }}"
+              #         },
+              #         "accessory": {
+              #           "type": "button",
+              #           "action_id": "lds_button",
+              #           "text": {
+              #             "type": "plain_text",
+              #             "text": "View"
+              #           },
+              #           "url": "${{ needs.workspace2_lds.outputs.lds_url }}"
+              #         }
+              #       },    
+              #       {    
+              #         "type": "section",
+              #         "text": {
+              #           "type": "mrkdwn",
+              #           "text": "*qa has changes?*\n${{ needs.workspace3_qa.outputs.qa_result }}"
+              #         },
+              #         "accessory": {
+              #           "type": "button",
+              #           "action_id": "qa_button",
+              #           "text": {
+              #             "type": "plain_text",
+              #             "text": "View"
+              #           },
+              #           "url": "${{ needs.workspace3_qa.outputs.qa_url }}"
+              #         }
+              #       }
+              #     ]
+              #   }
+              # ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
