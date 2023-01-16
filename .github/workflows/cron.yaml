@@ -13,7 +13,7 @@ jobs:
     name: "ext plan"
     runs-on: ubuntu-latest
     outputs:
-      result: "true"
+      result: "false"
       url: "https://google.com"
       # result: ${{ steps.ext-run.outputs.has-changes }}
       # url: ${{ steps.ext-run.outputs.run-url }}
