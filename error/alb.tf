@@ -10,25 +10,25 @@
 #   }
 # }
 
-resource "aws_security_group" "alb" {
-  name        = "${var.env}-${var.name_prefix}-alb"
-  description = "${var.env}-${var.name_prefix}-alb"
-  vpc_id      = aws_vpc.vpc.id
+# resource "aws_security_group" "alb" {
+#   name        = "${var.env}-${var.name_prefix}-alb"
+#   description = "${var.env}-${var.name_prefix}-alb"
+#   vpc_id      = aws_vpc.vpc.id
 
-  ingress {
-    from_port   = var.server_port
-    to_port     = var.server_port
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = var.server_port
+#     to_port     = var.server_port
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  egress {
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "${var.env}-${var.name_prefix}-alb"
-  }
-}
+#   egress {
+#     protocol    = "-1"
+#     from_port   = 0
+#     to_port     = 0
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#   tags = {
+#     Name = "${var.env}-${var.name_prefix}-alb"
+#   }
+# }
