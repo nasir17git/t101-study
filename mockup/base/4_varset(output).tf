@@ -16,7 +16,7 @@ resource "tfe_variable" "dev_vpc" {
 
 resource "tfe_variable" "dev_sbn1" {
   key             = "dev_sbn1"
-  value           = aws_subnet.dev["1"]
+  value           = aws_subnet.dev["1"].id
   description     = "dev subnet1 id"
   category        = "terraform"
   hcl             = true
@@ -25,7 +25,7 @@ resource "tfe_variable" "dev_sbn1" {
 
 resource "tfe_variable" "dev_sbn2" {
   key             = "dev_sbn2"
-  value           = aws_subnet.dev["2"]
+  value           = aws_subnet.dev["2"].id
   description     = "dev subnet2 id"
   category        = "terraform"
   hcl             = true
