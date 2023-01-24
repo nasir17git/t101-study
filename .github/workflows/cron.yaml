@@ -1,9 +1,9 @@
 name: daily_check
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   schedule:
     - cron: "0 0 * * 1-5" # 한국시간 월-금 오전 9시 실행 > 깃헙액션 이슈로 실제 실행은 1시간정도 딜레이
   workflow_dispatch:
