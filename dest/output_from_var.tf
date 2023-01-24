@@ -5,3 +5,12 @@ output "ccc-result" {
 output "ddd-result" {
     value = var.ddd
 }
+
+
+variable "ccc" {
+  
+}
+
+variable "ddd" {
+  
+}
