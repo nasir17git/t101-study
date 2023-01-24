@@ -13,6 +13,7 @@ resource "random_string" "ccc" {
   special = true
 }
 
-output "value" {
-  value = random_string.aaa
+resource "random_string" "ddd" {
+  length  = 10
+  special = true
 }
