@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "org-test-221226"
     workspaces {
-      name = "src"
+      name = "dest_src"
     }
   }
   required_providers {
