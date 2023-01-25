@@ -132,7 +132,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "message for noti, status: ${{ env.NOTI }}",
+              "text": "$(date +'%Y-%m-%d'), All status: ${{ env.NOTI }}",
               "blocks": [
                 {
                   "type": "header",
