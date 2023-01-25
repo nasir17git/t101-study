@@ -94,7 +94,9 @@ jobs:
     steps: 
       - name: get current date
         id: date
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        run: |
+          echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "DATE_SHORT=$(date +'%y%m%d')" >> $GITHUB_ENV
 
       - name: Check for changes
         id: check
@@ -132,7 +134,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "$(date +'%Y-%m-%d'), All status: ${{ env.NOTI }}",
+              "text": "$${{ env.DATE_SHORT }}, All status: ${{ env.NOTI }}",
               "blocks": [
                 {
                   "type": "header",
