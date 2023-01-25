@@ -103,10 +103,10 @@ jobs:
         run: |
           if [[ "${{ needs.workspace1_ext.outputs.ext_result }}" == "${{ needs.workspace2_lds.outputs.lds_result }}" ]] && [[ "${{ needs.workspace2_lds.outputs.lds_result }}" == "${{ needs.workspace3_qa.outputs.qa_result }}" ]]; then
             echo "STATUS=#008000" >> $GITHUB_ENV
-            echo "NOTI=Good" >> $GITHUB_ENV
+            echo "NOTI=:white_check_mark: Good" >> $GITHUB_ENV
           else
             echo "STATUS=#FF0000" >> $GITHUB_ENV
-            echo "NOTI=Bad" >> $GITHUB_ENV
+            echo "NOTI=:icon_error: Bad" >> $GITHUB_ENV
           fi
 
           if [[ "${{ needs.workspace1_ext.outputs.result }}" == "false" ]]; then
@@ -134,7 +134,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "$${{ env.DATE_SHORT }}, All status: ${{ env.NOTI }}",
+              "text": "${{ env.DATE_SHORT }}, All terraform status: ${{ env.NOTI }}",
               "blocks": [
                 {
                   "type": "header",
