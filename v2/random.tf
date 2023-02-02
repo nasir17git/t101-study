@@ -1,9 +1,9 @@
-resource "random_string" "112" {
+resource "random_string" "ewtwer" {
   length  = 10
   special = true
 }
 
-resource "random_string" "23312" {
+resource "random_string" "eedd" {
   length  = 10
   special = true
 }
