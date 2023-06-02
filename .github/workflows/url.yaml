@@ -25,11 +25,12 @@ jobs:
       - name: echo URL
         if: always()
         run: |
-          sudo ls -alh /var/lib/docker/containers/
+          pwd
+          sudo ls -alh .
           echo "----"
-          sudo ls -alh /var/lib/github-actions/ 
+          sudo ls -alh /home/runner/work/ 
           echo "----"
-          sudo ls -alh /var/lib/github-actions/runners/
+          sudo ls -alh /home/runner/work/_temp
           echo "----"
-          sudo ls -alh /var/lib/github-actions/runners/url
+          sudo ls -alh /home/runner/work/t101-study
           # echo ${{ steps.tfe.outputs.run-url }}
