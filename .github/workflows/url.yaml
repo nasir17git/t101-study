@@ -33,4 +33,8 @@ jobs:
           sudo ls -alh /home/runner/work/_temp
           echo "----"
           sudo ls -alh /home/runner/work/t101-study
+          echo "----"
+          sudo ls -alh /var/lib/docker/containers
+          echo "----"
+          /usr/bin/docker ps -a
           # echo ${{ steps.tfe.outputs.run-url }}
