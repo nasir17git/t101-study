@@ -53,13 +53,22 @@ jobs:
           echo "/home/runner/work/_PipelineMapping/nasir17git"
           sudo ls -alh /home/runner/work/_PipelineMapping/nasir17git
           echo "----"
+          echo "/home/runner/work/_PipelineMapping/nasir17git/t101-study"
+          sudo ls -alh /home/runner/work/_PipelineMapping/nasir17git/t101-study
+          echo "----"
           echo "/home/runner/work/_actions"
           sudo ls -alh /home/runner/work/_actions
           echo "----"
           echo "/home/runner/work/_actions/actions"
           sudo ls -alh /home/runner/work/_actions/actions
           echo "----"
+          echo "/home/runner/work/_actions/actions/checkout"
+          sudo ls -alh /home/runner/work/_actions/actions/checkout
+          echo "----"
           echo "/home/runner/work/_actions/kvrhdn"
           sudo ls -alh /home/runner/work/_actions/kvrhdn
+          echo "----"
+          echo "/home/runner/work/_actions/kvrhdn/tfe-run"
+          sudo ls -alh /home/runner/work/_actions/kvrhdn/tfe-run
 
 
