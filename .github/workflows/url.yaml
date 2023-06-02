@@ -12,18 +12,33 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: kvrhdn/tfe-run@v1
-        id: tfe
+      - uses: hashicorp/setup-terraform@v2
+        id: trf
         with:
-          token: ${{ secrets.TFE_TOKEN }}
-          organization: org-test-221226
-          workspace: trf_cloud
-          message: |
-            Run triggered using tfe-run (commit: ${{ github.SHA }})
-          type: plan
-          wait-for-completion: true
-      - name: echo URL
-        if: always()
+          cli_config_credentials_token: ${{ secrets.TFE_TOKEN }}
+      - name: Terraform Plan
+        id: plan
         run: |
-          sudo cat /home/runner/work/_temp/_github_workflow/event.json
+          cd trf_cloud
+          terraform plan -no-color
+        continue-on-error: true
+      - name: echo result
+        run: |
+          echo ${{ steps.plan.outputs.stdout }}
+          echo ${{ steps.plan.outputs.stderr }}
+          echo ${{ steps.plan.outputs.exitcode }}
+      # - uses: kvrhdn/tfe-run@v1
+      #   id: tfe
+      #   with:
+      #     token: ${{ secrets.TFE_TOKEN }}
+      #     organization: org-test-221226
+      #     workspace: trf_cloud
+      #     message: |
+      #       Run triggered using tfe-run (commit: ${{ github.SHA }})
+      #     type: plan
+      #     wait-for-completion: true
+      # - name: echo URL
+      #   if: always()
+      #   run: |
+      #     sudo cat /home/runner/work/_temp/_github_workflow/event.json
 
