@@ -23,5 +23,6 @@ jobs:
           type: plan
           wait-for-completion: true
       - name: echo URL
+        if: always()
         run: |
           echo ${{ steps.tfe.outputs.run-url }}
