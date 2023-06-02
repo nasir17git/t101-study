@@ -25,5 +25,5 @@ jobs:
       - name: echo URL
         if: always()
         run: |
-          ls /var/lib/docker/containers/
+          sudo ls -alh /var/lib/docker/containers/
           # echo ${{ steps.tfe.outputs.run-url }}
