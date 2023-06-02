@@ -32,6 +32,10 @@ jobs:
           echo "----"
           sudo ls -alh /home/runner/work/_temp
           echo "----"
+          sudo ls -alh /home/runner/work/_temp/_github_home
+          echo "----"
+          sudo ls -alh /home/runner/work/_temp/_github_workflow
+          echo "----"
           sudo ls -alh /home/runner/work/t101-study
           echo "----"
           sudo ls -alh /var/lib/docker/containers
