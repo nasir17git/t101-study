@@ -22,6 +22,7 @@ jobs:
         id: plan
         run: |
           cd trf_cloud
+          terraform init
           terraform plan -no-color
         continue-on-error: true
       - name: echo result
