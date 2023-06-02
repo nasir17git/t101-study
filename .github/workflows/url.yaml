@@ -24,4 +24,4 @@ jobs:
           wait-for-completion: true
       - name: echo URL
         run: |
-        echo ${{ steps.tfe.outputs.run-url }}
+          echo ${{ steps.tfe.outputs.run-url }}
