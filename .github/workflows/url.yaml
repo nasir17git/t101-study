@@ -20,7 +20,6 @@ jobs:
           workspace: trf_cloud
           message: |
             Run triggered using tfe-run (commit: ${{ github.SHA }})
-          directory: trf_cloud
           type: plan
           wait-for-completion: true
       - name: echo URL
