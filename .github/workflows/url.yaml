@@ -25,20 +25,5 @@ jobs:
       - name: echo URL
         if: always()
         run: |
-          pwd
-          sudo ls -alh .
-          echo "----"
-          sudo ls -alh /home/runner/work/ 
-          echo "----"
-          sudo ls -alh /home/runner/work/_temp
-          echo "----"
-          sudo ls -alh /home/runner/work/_temp/_github_home
-          echo "----"
-          sudo ls -alh /home/runner/work/_temp/_github_workflow
-          echo "----"
-          sudo ls -alh /home/runner/work/t101-study
-          echo "----"
-          sudo ls -alh /var/lib/docker/containers
-          echo "----"
-          /usr/bin/docker ps -a
-          # echo ${{ steps.tfe.outputs.run-url }}
+          sudo cat /home/runner/work/_temp/_github_workflow/event.json
+
